@@ -2,6 +2,17 @@ require 'sinatra/base'
 require 'mm_geoip.rb'
 require 'rack_mm_geoip.rb'
 
+class MMGeoip
+  def initialize(env)
+    @env = env # may be a Rack @env or any hash containing initial data
+    @env[:ip] ||= @env['REMOTE_ADDR'] || @env['HTTP_X_REAL_IP'] # :ip or "REMOTE_ADDR" should be present
+    
+    raise NoIpGiven.new unless @env[:ip]
+    
+    @geodb = GeoIP.new self.class.db_path
+  end
+end
+
 class App < Sinatra::Base
   enable :inline_templates
   use Rack::MMGeoip
