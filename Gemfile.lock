@@ -2,6 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     geoip (0.8.9)
+    haml (3.1.1)
     mm_geoip (0.0.2)
       geoip
     rack (1.3.0)
@@ -14,5 +15,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   mm_geoip
   sinatra
