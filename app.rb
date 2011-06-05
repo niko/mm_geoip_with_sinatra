@@ -1,3 +1,6 @@
+Bundler.setup
+Bundler.require
+
 require 'sinatra/base'
 require 'mm_geoip.rb'
 require 'rack_mm_geoip.rb'
