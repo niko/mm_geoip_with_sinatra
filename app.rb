@@ -8,12 +8,12 @@ class App < Sinatra::Base
   
   helpers do
     def geoip(field)
-      p request.env
       request.env['GEOIP'].send field
     end
   end
   
   get '/' do
+    p request.env
     haml :index
   end
 end
