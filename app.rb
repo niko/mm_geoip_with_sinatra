@@ -16,7 +16,7 @@ end
 
 class App < Sinatra::Base
   enable :inline_templates
-  use Rack::MMGeoip
+  # use Rack::MMGeoip
   
   helpers do
     def geoip(field)
@@ -25,8 +25,8 @@ class App < Sinatra::Base
   end
   
   get '/' do
-    p request.env
-    haml :index
+    request.env.inspect
+    # haml :index
   end
 end
 
