@@ -5,7 +5,7 @@ require 'rack_mm_geoip.rb'
 class MMGeoip
   def initialize(env)
     @env = env # may be a Rack @env or any hash containing initial data
-    @env[:ip] ||= @env["HTTP_X_REAL_IP"] # :ip or "REMOTE_ADDR" should be present
+    # @env[:ip] ||= @env["HTTP_X_REAL_IP"] # :ip or "REMOTE_ADDR" should be present
     @env[:ip] ||= @env["REMOTE_ADDR"] # :ip or "REMOTE_ADDR" should be present
     
     raise NoIpGiven.new unless @env[:ip]
