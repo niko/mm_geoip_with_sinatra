@@ -4,12 +4,8 @@ require 'rack_mm_geoip.rb'
 
 class MMGeoip
   def initialize(env)
-    p env
-    p VERSION
     @env = env # may be a Rack @env or any hash containing initial data
-    @env[:ip] ||= @env["HTTP_X_REAL_IP"] # :ip or "REMOTE_ADDR" should be present
-    @env[:ip] ||= @env["HTTP_X_FORWARDED_FOR"] # :ip or "REMOTE_ADDR" should be present
-    @env[:ip] ||= @env["REMOTE_ADDR"] # :ip or "REMOTE_ADDR" should be present
+    @env[:ip] ||= @env["HTTP_X_REAL_IP"] || @env["HTTP_X_FORWARDED_FOR"] || @env["REMOTE_ADDR"]
     
     raise NoIpGiven.new unless @env[:ip]
     
@@ -22,7 +18,6 @@ class MMGeoip
     looked_up_fields = @geodb.city @env[:ip]
     
     return @lookup = {} unless looked_up_fields
-    p looked_up_fields
     
     @lookup = Hash[FIELDS.zip looked_up_fields.to_a]
     @lookup[:region_name] = region_name
