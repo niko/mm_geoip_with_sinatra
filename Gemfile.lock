@@ -16,5 +16,5 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  mm_geoip
+  mm_geoip (>= 0.0.3)
   sinatra
