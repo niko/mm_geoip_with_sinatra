@@ -15,6 +15,19 @@ class MMGeoip
     
     @geodb = GeoIP.new self.class.db_path
   end
+  
+  def lookup
+    return @lookup if @lookup
+    
+    looked_up_fields = @geodb.city @env[:ip]
+    
+    return @lookup = {} unless looked_up_fields
+    p looked_up_fields
+    
+    @lookup = Hash[FIELDS.zip looked_up_fields]
+    @lookup[:region_name] = region_name
+    @lookup
+  end
 end
 
 class App < Sinatra::Base
