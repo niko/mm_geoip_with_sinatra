@@ -24,7 +24,7 @@ class MMGeoip
     return @lookup = {} unless looked_up_fields
     p looked_up_fields
     
-    @lookup = Hash[FIELDS.zip looked_up_fields]
+    @lookup = Hash[FIELDS.zip looked_up_fields.to_a]
     @lookup[:region_name] = region_name
     @lookup
   end
